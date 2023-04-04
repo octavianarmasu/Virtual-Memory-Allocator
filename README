@@ -1,0 +1,59 @@
+Nume: Armasu Octavian
+Grupă: 315CA
+
+## Virtual Memory Allocator
+Tema 1
+
+### Descriere:
+
+Tema a constanta in implementarea unui alocator de memorie virtuala folosind
+doua liste dublu inlantuite si conceptul de lista in lista. Prima lista
+reprezentata de lista de block-uri in care se afla lista de miniblock-uri.
+
+Comenzile ce se pot executa sunt:
+	- ALLOC_ARENA <size> - se aloca o arena ("fictiva") in care se adauga
+	 	block-urile
+	 	
+	- ALLOC_BLOCK <start_address> <size> - aloca un block de dimensiune
+	 	 size la adresa start_address
+	 	 
+	- FREE_BLOCK <address> -  va elibera miniblock-ul de la adresa address
+	
+	- READ <address> <size> - se va citi de la adresa primita un sir de
+		size caractere. Se va citi daca exista permisiune de citire si
+		daca exista text scris in respectivul miniblock.
+		
+	- WRITE <address> <size> <text> - Daca miniblock-ul are permisiune de
+	 	scriere, atunci in miniblock-ul ce contine sau incepe de la
+	 	adresa introdusa. Textul scris trebuie sa aiba size carcatere,
+	 	altfel se va citi pana se va ajunge la acel size (daca exista
+	 	si spatiu in miniblock-uri).
+	 	
+	- PMAP - va afisa dimensiunea totala a arenei,  spatiul liber din
+	 	arena, numarul de block-uri si miniblock-uri si adresele lor de
+	 	inceput si final
+	 	
+	- MPROTECT <address> <permisiuni> - modifica permisiunile
+	 	miniblock-ului de la adresa introdusa. Parametrii ce trebuie
+	 	introdusi sunt : PROT_NONE - nicio permisiune
+	 			 PROT_WRITE - permisiune de scriere
+	 			 PROT_READ - permisiune de citire
+	 			 PROT_EXEC - permisiune de executare
+ 
+  
+Pentru implementare am folosit implementarea listelor dublu inlantuite plus
+doua structuri pentru a retine datele din block si miniblock. 
+
+
+## Clarificari 
+
+Aproape in toate functiile din vma.c se va gasi secventa:
+unsigned pozitie = poz(lista, adresa)-1;
+dll_node_t* node = get_node_poz(lista, pozitie);
+
+EXPLICATIE: 
+	Functia poz va returna pozitia primului block care are adresa de start
+mai mare decat adresa trimisa ca parametru. Acel -1 este folosit pentru a ma
+duce la block-ul anterior din lista, deoarece acolo ar trebui sa se afle
+adresa pe care o caut. Astfel, iau un nod care sa pointeze la acel block din
+lista pentru a efectua operatiile necesare.
