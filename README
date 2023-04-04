@@ -57,3 +57,6 @@ mai mare decat adresa trimisa ca parametru. Acel -1 este folosit pentru a ma
 duce la block-ul anterior din lista, deoarece acolo ar trebui sa se afle
 adresa pe care o caut. Astfel, iau un nod care sa pointeze la acel block din
 lista pentru a efectua operatiile necesare.
+
+
+Pentru a rula : make build, iar apoi ./vma
