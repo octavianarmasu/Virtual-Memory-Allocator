@@ -18,7 +18,3 @@ run_vma : vma
 clean:
 	rm -f *.o vma
 	
-pack:
-	zip -FSr 315CA_ArmasuOctavian_Tema1.zip README Makefile *.c *.h
-
-.PHONY: pack clean
