@@ -44,9 +44,16 @@ int main(void) {
     if (strcmp(comm, "WRITE") == 0) {
       ok = 1;
       uint64_t adr, dim;
-
       scanf("%lu %lu", &adr, &dim);
-      write(arena, adr, dim);
+
+      char vc[STRING_MAX];
+      char c;
+      scanf("%c", &c);
+      for (uint64_t i = 0; i < dim; i++) {
+        scanf("%c", &c);
+        vc[i] = c;
+      }
+      write(arena, adr, dim, vc);
     }
     if (strcmp(comm, "READ") == 0) {
       ok = 1;
@@ -60,7 +67,9 @@ int main(void) {
 
       uint64_t adr;
       scanf("%lu", &adr);
-      mprotect(arena, adr);
+      char p[STRING_MAX];
+      fgets(p, STRING_MAX, stdin);
+      mprotect(arena, adr, p);
     }
     if (ok == 0) {
       printf("Invalid command. Please try again.\n");
